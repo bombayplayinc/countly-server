@@ -2,6 +2,7 @@
 var pluginManager = require('../../plugins/pluginManager');
 var request = require('countly-request')(pluginManager.getConfig("security"));
 var should = require('should');
+const testUtils = require("../testUtils");
 
 describe('Countly Request', () => {
 
@@ -59,6 +60,15 @@ describe('Countly Request', () => {
 
         });
 
+    });
+
+    it('Makes get request', (done) => {
+        request.get(`${testUtils.url}/o/ping`, (err, res) => {
+            should.not.exist(err);
+            should.exist(res);
+
+            done();
+        });
     });
 
     it('Make post request', () => {
